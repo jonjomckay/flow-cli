@@ -1,20 +1,26 @@
 package com.boomi.flow.cli;
 
-import com.google.inject.Injector;
+import com.boomi.flow.cli.client.FlowClient;
+import com.boomi.flow.cli.commands.AbstractCommand;
+import com.boomi.flow.cli.configuration.Configuration;
 import picocli.CommandLine;
 
-import javax.inject.Inject;
-
 public class CliFactory implements CommandLine.IFactory {
-    private final Injector injector;
+    private final FlowClient flowClient;
+    private final Configuration configuration;
 
-    @Inject
-    public CliFactory(Injector injector) {
-        this.injector = injector;
+    public CliFactory(FlowClient flowClient, Configuration configuration) {
+        this.flowClient = flowClient;
+        this.configuration = configuration;
     }
 
     @Override
     public <K> K create(Class<K> cls) throws Exception {
-        return injector.getInstance(cls);
+        if (AbstractCommand.class.isAssignableFrom(cls)) {
+            return cls.getConstructor(FlowClient.class, Configuration.class)
+                    .newInstance(flowClient, configuration);
+        }
+
+        return CommandLine.defaultFactory().create(cls);
     }
 }

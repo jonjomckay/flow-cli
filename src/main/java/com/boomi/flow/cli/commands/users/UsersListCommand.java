@@ -9,20 +9,14 @@ import com.boomi.flow.cli.configuration.Runtime;
 import com.jakewharton.fliptables.FlipTable;
 import picocli.CommandLine;
 
-import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @CommandLine.Command(name = "list")
 public class UsersListCommand extends AbstractCommand implements Runnable {
-    private FlowClient flowClient;
-    private Configuration configuration;
-
-    @Inject
     public UsersListCommand(FlowClient flowClient, Configuration configuration) {
-        this.flowClient = flowClient;
-        this.configuration = configuration;
+        super(flowClient, configuration);
     }
 
     @Override

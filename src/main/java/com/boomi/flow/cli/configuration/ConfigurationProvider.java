@@ -3,14 +3,12 @@ package com.boomi.flow.cli.configuration;
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 
-import javax.inject.Provider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-public class ConfigurationProvider implements Provider<Configuration> {
-    @Override
-    public Configuration get() {
+public class ConfigurationProvider {
+    public static Configuration create() {
         String value = System.getenv("XDG_CONFIG_HOME");
 
         if (value == null || value.trim().length() == 0) {
