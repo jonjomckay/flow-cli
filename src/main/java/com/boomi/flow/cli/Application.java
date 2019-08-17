@@ -6,11 +6,14 @@ import com.boomi.flow.cli.configuration.Configuration;
 import com.boomi.flow.cli.configuration.ConfigurationProvider;
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
+import org.fusesource.jansi.AnsiConsole;
 import picocli.CommandLine;
 
 
 public class Application {
     public static void main(String[] args) {
+        System.setProperty("jansi.passthrough", "true");
+        AnsiConsole.systemInstall();
 
         FlowClient flowClient = new HttpFlowClient(new Gson(), new OkHttpClient());
         Configuration configuration = ConfigurationProvider.create();
