@@ -23,7 +23,7 @@ public class ConfigurationProvider implements Provider<Configuration> {
         try {
             reader = new YamlReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            return null;
+            throw new RuntimeException("Could not find a configuration file at $XDG_CONFIG_HOME/boomi/flow-cli.yml");
         }
 
         try {
