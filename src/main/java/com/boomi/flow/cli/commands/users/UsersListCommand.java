@@ -61,6 +61,7 @@ public class UsersListCommand extends AbstractCommand implements Runnable {
                 };
 
                 System.out.println(FlipTable.of(headers, data.toArray(new String[0][])));
+                System.exit(0);
             }
         });
     }
