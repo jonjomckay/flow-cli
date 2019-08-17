@@ -3,19 +3,16 @@ package com.boomi.flow.cli.commands.users;
 import com.boomi.flow.cli.client.Callback;
 import com.boomi.flow.cli.client.FlowClient;
 import com.boomi.flow.cli.client.User;
+import com.boomi.flow.cli.commands.CommandTestBase;
 import com.boomi.flow.cli.configuration.Configuration;
 import com.boomi.flow.cli.configuration.Runtime;
 import com.boomi.flow.cli.options.CommonOptions;
 import com.google.common.collect.Lists;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.containsString;
@@ -25,23 +22,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UsersListCommandTests {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
-
-    @Before
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
-
-    @After
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
+public class UsersListCommandTests extends CommandTestBase {
 
     @Mock
     private FlowClient flowClient;
